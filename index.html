@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="files/uikit.min.css" />
+    <link rel="stylesheet" href="files/jquery.dataTables.min.css" />
+    <link href="files/buttons.dataTables.css" rel="stylesheet" type="text/css" />
+    <!--<link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet">-->
+
+    <title>Zarza</title>
+
+</head>
+
+
+<body>
+
+    <div class="uk-container uk-card-body uk-container-center uk-margin-top uk-width-1-1\@l ">
+
+
+        <!--<div class="uk-flex uk-flex-left uk-width-1-1\@l">-->
+        <div class="uk-width-1-1 uk-card uk-card-body  uk-background-muted" data-step="1"
+            data-intro="Muestra estadísticas respecto a fallas">
+            <div id="topfallas" class="uk-flex uk-flex-left uk-width-1-1\@l uk-card uk-card-body  uk-background-muted ">
+
+                <div class="uk-width-4-5 uk-margin-auto " data-step="2" data-intro="La tabla muestra el top de fallas">
+                    <legend class="uk-legend uk-margin-small-bottom">Precios<span uk-icon="warning"></span></legend>
+                    <table id="lista" class="display uk-animation-slide-left compact" style="width:100%">
+                        <thead>
+                            <tr>
+
+
+                                <th>Especie</th>
+                                <th>Marca</th>
+                                <th>Tipo Seco/Humedo</th>
+                                <th>Tipo Dieta
+                                <th>Etapa</th>
+                                <th>Categoria</th>
+                                <th>Razas P/M/G</th>
+                                <th>Empaque</th>
+                                <th>Gramaje</th>
+                                <th>Costo/Gasto</th>
+                                <th>Precio Máximo</th>
+                                <th>Precio</th>
+                                <th>Imagen</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script src="files/uikit.min.js"></script>
+    <script src="files/jquery.min.js"></script>
+    <script src="files/jquery.dataTables.min.js"></script>
+    <script src="files/precios.js"></script>
+
+    <script>
+        var dataSet = precios();
+        $(document).ready(function () {
+
+
+            $('#lista').DataTable({
+                data: dataSet,
+                lengthMenu: [
+                    [10, 15, 20, 50, -1],
+                    [10, 15, 20, 50, 'All']
+                ],
+                scrollY: '50vh',
+                scrollX: 600,
+                responsive: true,
+                paging: true,
+                ordering: true,
+                "order": [
+                    [1, "desc"]
+                ],
+                info: true
+            });
+
+            var table = $('#lista').DataTable();
+
+            $('#lista tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+        });
+    </script>
+
+    <!--<script type="text/javascript" src="${pageContext.request.contextPath}/js/intro/intro.js"></script>-->
+</body>
+
+</html>
